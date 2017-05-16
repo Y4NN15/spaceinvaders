@@ -1,5 +1,6 @@
 package fr.unilim.iut.spaceinvaders;
 
+import fr.unilim.iut.spaceinvaders.utils.DebordementEspaceJeuException;
 import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
 import org.junit.Test;
 import org.junit.Before;
@@ -78,46 +79,6 @@ public class SpaceInvadersTest {
     }
 
     @Test
-    public void test_VaisseauAvance_DeplacerVaisseauVersLaDroite() {
-
-        spaceInvaders.positionnerUnNouveauVaisseau(1, 1, 7, 9);
-
-        spaceInvaders.deplacerVaisseauVersLaDroite();
-
-        assertEquals("" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "........V......\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
-    }
-
-    @Test
-    public void test_VaisseauImmobile_DeplacerVaisseauVersLaDroite() {
-
-        spaceInvaders.positionnerUnNouveauVaisseau(1, 1, 14, 9);
-
-        spaceInvaders.deplacerVaisseauVersLaDroite();
-
-        assertEquals("" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "...............\n" +
-                "..............V\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
-    }
-
-    @Test
     public void test_VaisseauAvance_DeplacerVaisseauVersLaGauche() {
 
         spaceInvaders.positionnerUnNouveauVaisseau(1, 1, 7, 9);
@@ -172,4 +133,58 @@ public class SpaceInvadersTest {
 		".......VVV.....\n" + 
 		".......VVV.....\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
 	}
+
+    @Test
+    public void test_UnNouveauVaisseauPositionneDansEspaceJeuMaisAvecDimensionTropGrande_DoitLeverUneExceptionDeDebordement() {
+
+        try {
+            spaceInvaders.positionnerUnNouveauVaisseau(9,2,7,9);
+            fail("Dépassement du vaisseau à droite en raison de sa longueur trop importante : devrait déclencher une exception DebordementEspaceJeuException");
+        } catch (final DebordementEspaceJeuException e) {
+        }
+
+
+        try {
+            spaceInvaders.positionnerUnNouveauVaisseau(3,4,7,1);
+            fail("Dépassement du vaisseau vers le haut en raison de sa hauteur trop importante : devrait déclencher une exception DebordementEspaceJeuException");
+        } catch (final DebordementEspaceJeuException e) {
+        }
+
+    }
+
+    @Test
+    public void test_VaisseauAvance_DeplacerVaisseauVersLaDroite() {
+
+        spaceInvaders.positionnerUnNouveauVaisseau(3,2,7,9);
+        spaceInvaders.deplacerVaisseauVersLaDroite();
+        assertEquals("" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "........VVV....\n" +
+                "........VVV....\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+    }
+
+    @Test
+    public void test_VaisseauImmobile_DeplacerVaisseauVersLaDroite() {
+
+        spaceInvaders.positionnerUnNouveauVaisseau(3,2,12,9);
+        spaceInvaders.deplacerVaisseauVersLaDroite();
+        assertEquals("" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "...............\n" +
+                "............VVV\n" +
+                "............VVV\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+    }
 }
