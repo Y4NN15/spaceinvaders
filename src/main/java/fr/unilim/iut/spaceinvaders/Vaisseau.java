@@ -29,8 +29,16 @@ public class Vaisseau {
     private boolean estAbscisseCouverte(int x) {
         return (abscisseLaPlusAGauche() <= x) && (x <= abscisseLaPlusADroite());
     }
+    
+    public int hauteur() {
+		return this.dimension.hauteur();
+	}
 
-    private int ordonneeLaPlusBasse() {
+	public int longueur() {
+		return this.dimension.longueur();
+	}
+
+    public int ordonneeLaPlusBasse() {
         return this.origine.ordonnee() - this.dimension.hauteur() + 1;
     }
 
