@@ -67,13 +67,23 @@ public class SpaceInvaders implements Jeu {
     	{
 			vaisseau.seDeplacerVersLaDroite();
     	}
+    	if (!estDansEspaceJeu(vaisseau.abscisseLaPlusADroite(), vaisseau.ordonneeLaPlusHaute())) 
+		{
+			vaisseau.positionner(longueur - vaisseau.longueur(), vaisseau.ordonneeLaPlusHaute());
+		}
     }
 
     public void deplacerVaisseauVersLaGauche() {
-        if (vaisseau.abscisseLaPlusAGauche() > 0){ vaisseau.seDeplacerVersLaGauche();}
+        if (vaisseau.abscisseLaPlusAGauche() > 0)
+        { 
+        	vaisseau.seDeplacerVersLaGauche();
+        }
+        if (!estDansEspaceJeu(vaisseau.abscisseLaPlusAGauche(), vaisseau.ordonneeLaPlusHaute())) {
+			vaisseau.positionner(0, vaisseau.ordonneeLaPlusHaute());
+		}
     }
 
-    public void positionnerUnNouveauVaisseau(Dimension dimension, Position position) {
+    public void positionnerUnNouveauVaisseau(Dimension dimension, Position position, int vitesse) {
 
         int x = position.abscisse();
         int y = position.ordonnee();
@@ -89,8 +99,7 @@ public class SpaceInvaders implements Jeu {
         if (!estDansEspaceJeu(x, y - hauteurVaisseau + 1))
             throw new DebordementEspaceJeuException("Le vaisseau deborde de l'espace jeu vers le bas a cause de sa hauteur");
 
-        vaisseau = new Vaisseau(longueurVaisseau, hauteurVaisseau);
-        vaisseau.positionner(x, y);
+        vaisseau = new Vaisseau(dimension,position,vitesse);
     }
     
     public Vaisseau recupererVaisseau() {
@@ -117,7 +126,7 @@ public class SpaceInvaders implements Jeu {
 	public void initialiserJeu() {
 		Position positionVaisseau = new Position(this.longueur/2,this.hauteur-1);
 	    Dimension dimensionVaisseau = new Dimension(Constante.VAISSEAU_LONGUEUR, Constante.VAISSEAU_HAUTEUR);
-	    positionnerUnNouveauVaisseau(dimensionVaisseau, positionVaisseau);
+	    positionnerUnNouveauVaisseau(dimensionVaisseau, positionVaisseau, Constante.VAISSEAU_VITESSE);
 	}
 }
 
