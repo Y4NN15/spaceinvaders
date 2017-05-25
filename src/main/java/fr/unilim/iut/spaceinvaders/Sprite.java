@@ -1,6 +1,6 @@
 package fr.unilim.iut.spaceinvaders;
 
-public class Sprite {
+public abstract class Sprite {
 
 	protected Position origine;
 	protected Dimension dimension;
@@ -10,7 +10,14 @@ public class Sprite {
 		super();
 	}
 
-	public boolean occupeLaPosition(int x, int y) {
+    public Sprite(Dimension dimension, Position origine, int vitesse) {
+	    super();
+        this.origine = origine;
+        this.dimension = dimension;
+        this.vitesse = vitesse;
+    }
+
+    public boolean occupeLaPosition(int x, int y) {
 	    return estAbscisseCouverte(x) && estOrdonneeCouverte(y);
 	}
 
