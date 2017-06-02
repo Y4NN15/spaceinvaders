@@ -6,7 +6,7 @@ import fr.unilim.iut.spaceinvaders.utils.DebordementEspaceJeuException;
 import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
 import fr.unilim.iut.spaceinvaders.utils.MissileException;
 
-public class SpaceInvaders implements Jeu {
+public class SpaceInvaders extends Collision implements Jeu {
 
     int longueur;
     int hauteur;
@@ -179,10 +179,27 @@ public class SpaceInvaders implements Jeu {
 		{
 			this.deplacerEnvahisseur();
 		}
+		if (missile != null){
+			if (detecterCollision(missile, envahisseur)){
+				disparitionMissileEtEnvahisseur();
+			}
+		}
+		
+	}
+
+	public void disparitionMissileEtEnvahisseur() {
+		this.missile = null;
+		this.envahisseur = null;
 	}
 
 	public boolean etreFini() {
-		return false;
+		if (missile == null && envahisseur == null){
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public void initialiserJeu() {
@@ -191,7 +208,6 @@ public class SpaceInvaders implements Jeu {
 	    positionnerUnNouveauVaisseau(dimensionVaisseau, positionVaisseau, Constante.VAISSEAU_VITESSE);
 	    
 	    Position positionEnvahisseur = new Position(this.longueur/2, Constante.ENVAHISSEUR_HAUTEUR);
-	    System.out.println(-(Constante.ENVAHISSEUR_HAUTEUR));
 	    Dimension dimensionEnvahisseur = new Dimension(Constante.ENVAHISSEUR_LONGUEUR, Constante.ENVAHISSEUR_HAUTEUR);
 	    positionnerUnNouvelEnvahisseur(dimensionEnvahisseur, positionEnvahisseur, Constante.ENVAHISSEUR_VITESSE);
 	}
