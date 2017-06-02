@@ -1,9 +1,10 @@
 package fr.unilim.iut.spaceinvaders;
 
+import fr.unilim.iut.spaceinvaders.model.Dimension;
+import fr.unilim.iut.spaceinvaders.model.Position;
+import fr.unilim.iut.spaceinvaders.model.Vaisseau;
 import fr.unilim.iut.spaceinvaders.utils.MissileException;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by knarc on 26/05/2017.
