@@ -17,6 +17,8 @@ public abstract class Sprite {
         this.vitesse = vitesse;
     }
 
+    
+    
     public boolean occupeLaPosition(int x, int y) {
 	    return estAbscisseCouverte(x) && estOrdonneeCouverte(y);
 	}
@@ -29,6 +31,8 @@ public abstract class Sprite {
 	    return (abscisseLaPlusAGauche() <= x) && (x <= abscisseLaPlusADroite());
 	}
 
+	
+	
 	public int hauteur() {
 		return this.dimension.hauteur();
 	}
@@ -37,6 +41,8 @@ public abstract class Sprite {
 		return this.dimension.longueur();
 	}
 
+	
+	
 	public int ordonneeLaPlusBasse() {
 	    return this.origine.ordonnee() - this.dimension.hauteur() + 1;
 	}
@@ -45,6 +51,8 @@ public abstract class Sprite {
 	    return this.origine.ordonnee();
 	}
 
+	
+	
 	public int abscisseLaPlusADroite() {
 	    return this.origine.abscisse() + this.dimension.longueur() - 1;
 	}
@@ -52,11 +60,15 @@ public abstract class Sprite {
 	public int abscisseLaPlusAGauche() {
 	    return this.origine.abscisse();
 	}
+	
 
+	
 	public void positionner(int x, int y) {
 	    this.origine.changerAbscisse(x);
 	    this.origine.changerOrdonnee(y);
 	}
+	
+	
 	
 	public void deplacerVerticalementVers(Direction direction) {
 		this.origine.changerOrdonnee(this.origine.ordonnee() + direction.valeur()*vitesse);

@@ -9,6 +9,7 @@ public class Vaisseau extends Sprite {
     }
 
 
+    
     public Missile tirerUnMissile(Dimension dimensionMissile, int vitesseMissile) {
 
         if (dimensionMissile.longueur() > dimension.longueur()){
@@ -27,4 +28,6 @@ public class Vaisseau extends Sprite {
         int ordonneeeOrigineMissile = this.ordonneeLaPlusBasse() - 1;
         return new Position(abscisseOrigineMissile, ordonneeeOrigineMissile);
     }
+    
+    
 }
